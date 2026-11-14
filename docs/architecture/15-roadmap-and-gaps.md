@@ -20,7 +20,9 @@
 | Audit log | yes | not implemented |
 | Observability | yes | not implemented |
 | Replay tests and time-skipping tests | yes | not implemented (no Temporal server here) |
-| Multi-tenancy | yes | single tenant |
+| Multi-tenancy and roles | yes | single tenant, no roles |
+| Admin side and user side clients | yes | not implemented |
+| Procedures and interpreter | yes | not implemented |
 
 ## Phases
 
@@ -34,7 +36,7 @@
 
 **Phase 4: operations.** Budgets and suspend; schedules API with runtime creation and loop guards; child-workflow subagents; observability (OpenTelemetry, search attributes, dashboards); runbooks; multi-queue deployment; worker versioning.
 
-**Phase 5: scale and product.** Tenants and namespaces; evaluations; MCP tool grants with OAuth; a web client; load tests; backup drills.
+**Phase 5: scale and product.** Tenants and namespaces; evaluations; MCP tool grants with OAuth; admin side and user side web clients (F15, F16); audit query and export (F17); load tests; backup drills.
 
 ## Risks
 

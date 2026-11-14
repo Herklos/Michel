@@ -1,7 +1,10 @@
 # grokbot
 
-A durable, multi-channel bot backend. Each bot is one long-lived Temporal workflow
-that runs a LangChain Deep Agent. The agent plans, delegates to sub-agents, reads
+A structured agent platform for businesses. A business defines its processes as
+**procedures** (ordered steps that agents carry out, with approvals, conditions, loops
+and bounded tool access). Procedures run as Temporal workflows, enforced by code, with
+an admin side to configure and audit them and a chat-style user side. Each bot is one
+long-lived Temporal workflow that runs a LangChain Deep Agent. The agent plans, delegates to sub-agents, reads
 and writes a per-bot workspace, pauses for human approval before side effects, and
 survives crashes, restarts and long histories.
 
