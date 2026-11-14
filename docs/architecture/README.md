@@ -1,6 +1,6 @@
-# grokbot: target architecture
+# michel: target architecture
 
-Status: **design**, written 2026-11-14. The code in `grokbot/` implements a subset (marked in each page). The project goal document (the Claude artifact the request referred to) could not be opened from this session; this set was written from the research in `docs/research/`. Reconcile it with that goal document when it is available.
+Status: **design**, written 2026-11-14. The code in `michel/` implements a subset (marked in each page). The project goal document (the Claude artifact the request referred to) could not be opened from this session; this set was written from the research in `docs/research/`. Reconcile it with that goal document when it is available.
 
 ## Stack decision
 
@@ -41,6 +41,6 @@ Status: **design**, written 2026-11-14. The code in `grokbot/` implements a subs
 
 ## Labels used in the pages
 
-- **[implemented]**: present in `grokbot/` and tested offline.
+- **[implemented]**: present in `michel/` and tested offline.
 - **[designed]**: decided here, not yet in code.
 - **[verify]**: depends on a Temporal or deepagents behaviour not yet tested against a running server.

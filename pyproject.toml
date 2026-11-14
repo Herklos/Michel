@@ -1,5 +1,5 @@
 [project]
-name = "grokbot"
+name = "michel"
 version = "0.1.0"
 description = "Durable, multi-channel agent bot backend: Temporal workflows running LangChain Deep Agents."
 requires-python = ">=3.11"
@@ -22,7 +22,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["grokbot*"]
+include = ["michel*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,15 +1,15 @@
 # 06. Gap analysis: what a "managed Deep Agent runtime" needs, mapped to our build
 
-Purpose: decide what to build ourselves, what to reuse (MIT), and what the managed product provides that we do not yet have. Based on files 01–05 and our existing backend in `grokbot/` (on branch `claude/serene-pasteur-gu7bbs`). Read and written 2026-11-14.
+Purpose: decide what to build ourselves, what to reuse (MIT), and what the managed product provides that we do not yet have. Based on files 01–05 and our existing backend in `michel/` (on branch `claude/serene-pasteur-gu7bbs`). Read and written 2026-11-14.
 
 ## 1. Feature matrix
 
-Legend: **Have** = implemented and offline-tested in `grokbot/`. **Partial** = a piece exists. **Missing** = not started. Each row names its managed-product reference from files 01–05.
+Legend: **Have** = implemented and offline-tested in `michel/`. **Partial** = a piece exists. **Missing** = not started. Each row names its managed-product reference from files 01–05.
 
 | # | Capability | Managed product (reference) | Our status | Notes |
 |---|---|---|---|---|
 | 1 | Durable agent loop | LangGraph Agent Server with checkpointer | **Have** (Temporal workflow + `temporalio-deepagents`) | Temporal replaces the Agent Server's queue and checkpoints. Not executed end to end yet. |
-| 2 | Declarative agent project (`agent.py`, `instructions.md`) | `define_deep_agent` (file 01 §2) | **Missing** | We build agents in code (`grokbot/agent.py`). A config-file or Python-factory layer is needed. |
+| 2 | Declarative agent project (`agent.py`, `instructions.md`) | `define_deep_agent` (file 01 §2) | **Missing** | We build agents in code (`michel/agent.py`). A config-file or Python-factory layer is needed. |
 | 3 | Per-run dynamic configuration (factory) | `agent(runtime)` factory (file 01 §2) | **Partial** | `BotConfig` is fixed per bot at creation. Per-run model/tool selection is missing. |
 | 4 | Human-in-the-loop approvals | `interrupt_on`, Slack/HTTP approval routing (files 01, 03) | **Have** (tool-level). Routing to a channel: **Missing** | Approve/reject via query + update. Route the prompt into the originating channel. |
 | 5 | Correlated interrupts | `INTERRUPT_CORRELATION_KEY` (file 02 §3) | **Missing** | Needed when several approvals can be pending. |
@@ -60,7 +60,7 @@ Legend: **Have** = implemented and offline-tested in `grokbot/`. **Partial** = a
 ## 4. Priorities
 
 **P0 (correctness and safety of what exists):**
-1. Run the grokbot workflows end to end on a Temporal server (blocked here; file 07 §1).
+1. Run the michel workflows end to end on a Temporal server (blocked here; file 07 §1).
 2. Add Standard Webhooks signing to the gateway (row 18).
 3. Resolve IPs before fetch, or block private ranges (row 28).
 
@@ -91,7 +91,7 @@ Legend: **Have** = implemented and offline-tested in `grokbot/`. **Partial** = a
                     worker: model provider · MCP tools · sandbox (Docker) · memory store · channel post
 ```
 
-Our current `grokbot/` covers the center. The gaps are the edges: channels, identity, memory layers, sandbox, MCP, and the declarative deploy.
+Our current `michel/` covers the center. The gaps are the edges: channels, identity, memory layers, sandbox, MCP, and the declarative deploy.
 
 ## 6. What still needs deciding (for the user)
 

@@ -41,12 +41,12 @@ Structured JSON logs with `thread_id`, `run_id`, `tenant_id`, `activity_id`, `at
 | Temporal | `temporal server start-dev` | self-hosted Temporal (with Postgres persistence and visibility) or Temporal Cloud |
 | PostgreSQL | docker compose | managed Postgres, one database per environment |
 | Object store | MinIO | S3 or compatible |
-| Gateway | `uvicorn grokbot.asgi:app` | container, horizontal replicas |
-| Workers | `python -m grokbot.worker` | one container per task-queue group, horizontally scaled |
+| Gateway | `uvicorn michel.asgi:app` | container, horizontal replicas |
+| Workers | `python -m michel.worker` | one container per task-queue group, horizontally scaled |
 | Sandbox hosts | local Docker | dedicated hosts or a sandbox provider |
 | Telemetry | console | OpenTelemetry collector → metrics and traces backend |
 
-Configuration is environment variables (`grokbot/config.py`). Secrets come from the platform's secret manager, never from the image.
+Configuration is environment variables (`michel/config.py`). Secrets come from the platform's secret manager, never from the image.
 
 ## Versioning and rollout
 

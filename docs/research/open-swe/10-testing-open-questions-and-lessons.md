@@ -35,11 +35,11 @@ OpenWiki appears as a LangChain product in the docs index. The repo's `openwiki/
 4. **Which of the 309 operations are stable?** Only `swagger.json` names were read.
 5. **What does `review-scout` produce end to end?** It plans a PR walkthrough, but the output path was not traced.
 6. **How are approvals enforced in practice?** README says push-detection is a heuristic.
-7. **What is the managed-runtime dependency for a self-hosted team?** The README says deploying requires Managed Deep Agents, and forking is the alternative. A fork would replace `mda/` with our own runtime (our `grokbot/`).
+7. **What is the managed-runtime dependency for a self-hosted team?** The README says deploying requires Managed Deep Agents, and forking is the alternative. A fork would replace `mda/` with our own runtime (our `michel/`).
 8. **Vendored code licensing:** `vendor/` is explicitly unlicensed. Any reuse must go through the MDA SDK's own MIT license (for the Python package) or a new implementation.
 9. **`openwiki/` and `trace_flight_*` tables:** not read.
 
-## 4. Lessons for our own build (`grokbot/`)
+## 4. Lessons for our own build (`michel/`)
 
 These are concrete patterns from this repo that our design does not yet have.
 
@@ -62,4 +62,4 @@ These are concrete patterns from this repo that our design does not yet have.
 2. Read `docs/INSTALLATION.md` in full to list every external credential and GitHub App permission.
 3. Read the managed docs for the agent definition and channels (`managed-deep-agents-agent-definition.md`, `managed-deep-agents-channels.md`) and map them to this repo's `mda/`.
 4. Trace one `agent` run from `openswe/dispatch.py` through `mda/agent.py` to a tool call, to confirm the endpoint sequence in file 02 §2.
-5. Decide which of the lessons in §4 to adopt in `grokbot/`, starting with items 2, 4 and 8.
+5. Decide which of the lessons in §4 to adopt in `michel/`, starting with items 2, 4 and 8.

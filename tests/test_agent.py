@@ -13,9 +13,9 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
 from temporalio.deepagents.testing import FakeModel
 
-from grokbot.agent import APPROVAL_REQUIRED, build_bot_agent
-from grokbot.models import BotConfig
-from grokbot.workflows import _approval_summary, _last_ai_text
+from michel.agent import APPROVAL_REQUIRED, build_bot_agent
+from michel.models import BotConfig
+from michel.workflows import _approval_summary, _last_ai_text
 
 CALLS: list[tuple[str, str]] = []
 

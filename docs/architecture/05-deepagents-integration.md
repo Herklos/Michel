@@ -6,14 +6,14 @@ Versions: `deepagents==0.7.38`, `temporalio-deepagents==0.0.3` (pre-release), `t
 
 | deepagents feature | Temporal realisation | Where it runs | Status |
 |---|---|---|---|
-| Agent loop (`create_deep_agent`) | `create_temporal_deep_agent(model="provider:name", …)` inside the thread workflow; the loop replays deterministically | workflow | **[implemented]** `grokbot/agent.py` |
+| Agent loop (`create_deep_agent`) | `create_temporal_deep_agent(model="provider:name", …)` inside the thread workflow; the loop replays deterministically | workflow | **[implemented]** `michel/agent.py` |
 | Model call | `deepagents.invoke_model` activity (one per model call); the workflow ships only the model name | `llm` queue | **[implemented]** by the plugin |
 | Streaming tokens | `streaming_topic` on the plugin; activity publishes chunk batches to a workflow stream; the final message still returns to the workflow | `llm` queue → clients | **[designed]**, verify streams in 1.36.0 |
 | Planning (`write_todos`) | built-in state middleware | workflow | **[implemented]** (built-in) |
 | Files in state (`StateBackend`, default) | in workflow state; replayed deterministically | workflow | **[implemented]** |
-| Durable workspace files (`TemporalBackend("workspace")`) | `deepagents.backend_op` activities against a worker-side filesystem factory | `io` / `sandbox` queue | **[implemented]** in `grokbot/workflows.py`; **[verify]** end to end |
+| Durable workspace files (`TemporalBackend("workspace")`) | `deepagents.backend_op` activities against a worker-side filesystem factory | `io` / `sandbox` queue | **[implemented]** in `michel/workflows.py`; **[verify]** end to end |
 | Sandbox execution (`execute`) | a custom backend whose operations are activities against the sandbox provider | `sandbox` queue | **[designed]** (see `07`) |
-| Custom tools with I/O | `tool_as_activity(fn, start_to_close_timeout=…)` | `io` queue | **[implemented]** `grokbot/tools.py` |
+| Custom tools with I/O | `tool_as_activity(fn, start_to_close_timeout=…)` | `io` queue | **[implemented]** `michel/tools.py` |
 | Existing activity as a tool | `activity_as_tool(activity, activity_options=…)` | any | available |
 | Pure tools (no I/O) | plain LangChain tools in the workflow | workflow | the plugin warns about unwrapped I/O tools |
 | Human-in-the-loop | `interrupt_on={tool: True}` with a checkpointer; resume with `Command(resume=…)` after a `decide_approval` update | workflow + Postgres audit | **[implemented]** offline; **[verify]** with the server |

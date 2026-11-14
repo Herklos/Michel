@@ -89,7 +89,7 @@ These are unverified. Each needs a Temporal server (`temporal server start-dev`)
 
 1. **Basic durability.** Start `hello_world`-style workflow, kill the worker mid-LLM call, restart it, and confirm the model call is retried, not the whole conversation.
 2. **Determinism.** Replay recorded histories with `temporalio.worker.Replayer` after code changes, to catch non-deterministic workflow code.
-3. **Sandbox import.** Confirm workflow modules that import `deepagents`, LangChain, and our `grokbot.tools` load under the sandbox without `imports_passed_through` guards. Our code uses the guard; test that the guard is still needed or harmless.
+3. **Sandbox import.** Confirm workflow modules that import `deepagents`, LangChain, and our `michel.tools` load under the sandbox without `imports_passed_through` guards. Our code uses the guard; test that the guard is still needed or harmless.
 4. **Unwrapped tool warning.** Confirm an unwrapped non-built-in tool emits the construction warning.
 5. **Activity registration.** Confirm `tool_as_activity` tools are found on a worker that imports the module, and fail clearly on one that does not.
 6. **Plugin instance rules.** Confirm the `ValueError` when a second, different `DeepAgentsPlugin` instance is added to the worker.

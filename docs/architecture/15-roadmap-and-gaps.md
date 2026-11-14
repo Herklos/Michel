@@ -2,7 +2,7 @@
 
 ## Where the code stands
 
-| Area | Designed here | In `grokbot/` today |
+| Area | Designed here | In `michel/` today |
 |---|---|---|
 | Gateway (HTTP API, auth, schedules, approvals, transcript) | yes | **implemented** (offline tests, fake Temporal client) |
 | Thread workflow | yes | **implemented** as `BotWorkflow`, with the inbox and approval wait; not run on a server |

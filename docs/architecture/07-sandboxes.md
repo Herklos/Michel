@@ -61,4 +61,4 @@ Implementations:
 
 ## What the current code does
 
-Nothing sandboxed yet. The `FilesystemBackend` in `grokbot/worker.py` writes to a directory on the worker. It is a trusted-code backend and must be replaced before any untrusted code runs. **[implemented]** as a stopgap only.
+Nothing sandboxed yet. The `FilesystemBackend` in `michel/worker.py` writes to a directory on the worker. It is a trusted-code backend and must be replaced before any untrusted code runs. **[implemented]** as a stopgap only.

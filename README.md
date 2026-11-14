@@ -1,4 +1,4 @@
-# grokbot
+# michel
 
 A structured agent platform for businesses. A business defines its processes as
 **procedures** (ordered steps that agents carry out, with approvals, conditions, loops
@@ -49,12 +49,12 @@ Key decisions:
 
 | Path | Purpose |
 |---|---|
-| `grokbot/workflows.py` | `BotWorkflow` (conversation, approvals, continue-as-new) and `ScheduledTurnWorkflow` |
-| `grokbot/agent.py` | Builds the Deep Agent: tools, sub-agent, approval policy |
-| `grokbot/tools.py` | `fetch_url` and `deliver_channel_message` as activity-backed tools, plus policy checks |
-| `grokbot/worker.py` | Worker process and `DeepAgentsPlugin` wiring, including the per-bot workspace factory |
-| `grokbot/gateway.py` | HTTP API that maps requests to Temporal operations |
-| `grokbot/config.py` | Environment settings |
+| `michel/workflows.py` | `BotWorkflow` (conversation, approvals, continue-as-new) and `ScheduledTurnWorkflow` |
+| `michel/agent.py` | Builds the Deep Agent: tools, sub-agent, approval policy |
+| `michel/tools.py` | `fetch_url` and `deliver_channel_message` as activity-backed tools, plus policy checks |
+| `michel/worker.py` | Worker process and `DeepAgentsPlugin` wiring, including the per-bot workspace factory |
+| `michel/gateway.py` | HTTP API that maps requests to Temporal operations |
+| `michel/config.py` | Environment settings |
 | `tests/` | Offline tests (no Temporal server or LLM needed) |
 
 ## Run it
@@ -72,11 +72,11 @@ temporal server start-dev
 export FETCH_ALLOWED_HOSTS=docs.python.org
 export CHANNEL_WEBHOOKS='{"ops": "https://hooks.example.com/ops"}'
 export WORKSPACE_ROOT=./data/workspaces
-python -m grokbot.worker
+python -m michel.worker
 
 # 3. Gateway
 export GATEWAY_API_KEY=change-me
-uvicorn grokbot.asgi:app --port 8000
+uvicorn michel.asgi:app --port 8000
 ```
 
 ### Example session
@@ -107,7 +107,7 @@ curl -s -H "$H" -H 'content-type: application/json' -d '{"name":"morning","cron"
 
 | Variable | Where | Default | Meaning |
 |---|---|---|---|
-| `TEMPORAL_ADDRESS`, `TEMPORAL_NAMESPACE`, `TASK_QUEUE` | both | `localhost:7233`, `default`, `grokbot` | Temporal connection |
+| `TEMPORAL_ADDRESS`, `TEMPORAL_NAMESPACE`, `TASK_QUEUE` | both | `localhost:7233`, `default`, `michel` | Temporal connection |
 | `BOT_MODEL` | gateway | `anthropic:claude-sonnet-5-5` | Model name stamped into new bots |
 | `ANTHROPIC_API_KEY` | worker | — | Model provider key (read by LangChain on the worker) |
 | `WORKSPACE_ROOT` | worker | `./data/workspaces` | Per-bot filesystem root |

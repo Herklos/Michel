@@ -11,7 +11,7 @@ Primary sources were the PyPI wheels (read directly) and their READMEs. The offi
 | [03-channels-and-identity.md](03-channels-and-identity.md) | Slack, GitHub, Linear and HTTP channels; signed endpoints; identity mapping | same |
 | [04-platform-agent-server.md](04-platform-agent-server.md) | LangGraph Agent Server: routes, config, streaming, store, checkpointer, auth, licensing | `langgraph-api`, `langgraph-runtime-inmem`, `langgraph`, `langgraph-sdk`, `langgraph-cli` wheels |
 | [05-control-plane-and-cli.md](05-control-plane-and-cli.md) | `/v1/deepagents` control plane, deploy payloads, `mda` CLI | `deepagents-cli` 0.3.0 source (deprecated) and `managed-deepagents` README |
-| [06-build-gap-analysis.md](06-build-gap-analysis.md) | 33-row feature matrix against our `grokbot/`, licensing, priorities | files 01–05 and our code |
+| [06-build-gap-analysis.md](06-build-gap-analysis.md) | 33-row feature matrix against our `michel/`, licensing, priorities | files 01–05 and our code |
 | [07-testing-and-open-questions.md](07-testing-and-open-questions.md) | Limits of this session, test plan, open questions | all |
 | [08-docs-verification.md](08-docs-verification.md) | Check of files 01–07 against the official docs (`docs.langchain.com`), corrections, and new facts | official docs pages |
 

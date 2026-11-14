@@ -52,4 +52,4 @@ Grok Bot's shape (shared team Bots, proactive work, connector permissions asked 
 
 - x.ai changelog: `https://x.ai/changelog/bot` (blocked, 403, Cloudflare)
 - x.ai news: `https://x.ai/news/grok-bot-1-0` (not fetched; listed in search)
-- Coverage (search summaries): flaviocopes.com/grok-bot-1-0, pasqualepillitteri.it, fourweekmba.com, inoryva.blogspot.com, webpronews.com, cellcog.ai/blog/grok-bot-1-0, windowsreport.com, sumus.im/blog/grok-bot-1-0, help.apiyi.com, mynextdeveloper.com, alphasignal.ai, getgrokbot.com/en/changelog (third-party), x.com/blankspeaker/status/2112337801899565120
+- Coverage (search summaries): flaviocopes.com/grok-bot-1-0, pasqualepillitteri.it, fourweekmba.com, inoryva.blogspot.com, webpronews.com, cellcog.ai/blog/grok-bot-1-0, windowsreport.com, sumus.im/blog/grok-bot-1-0, help.apiyi.com, mynextdeveloper.com, alphasignal.ai, getmichel.com/en/changelog (third-party), x.com/blankspeaker/status/2112337801899565120

@@ -19,7 +19,7 @@ def _csv(value: str | None) -> frozenset[str]:
 class Settings:
     temporal_address: str = "localhost:7233"
     temporal_namespace: str = "default"
-    task_queue: str = "grokbot"
+    task_queue: str = "michel"
     default_model: str = "anthropic:claude-sonnet-5-5"
     workspace_root: str = "./data/workspaces"
     # Worker-side allowlists: an empty set means "deny everything" (secure default).
@@ -36,7 +36,7 @@ class Settings:
         return cls(
             temporal_address=e.get("TEMPORAL_ADDRESS", "localhost:7233"),
             temporal_namespace=e.get("TEMPORAL_NAMESPACE", "default"),
-            task_queue=e.get("TASK_QUEUE", "grokbot"),
+            task_queue=e.get("TASK_QUEUE", "michel"),
             default_model=e.get("BOT_MODEL", "anthropic:claude-sonnet-5-5"),
             workspace_root=e.get("WORKSPACE_ROOT", "./data/workspaces"),
             fetch_allowed_hosts=_csv(e.get("FETCH_ALLOWED_HOSTS")),

@@ -1,4 +1,4 @@
-"""ASGI entry point: ``uvicorn grokbot.asgi:app``.
+"""ASGI entry point: ``uvicorn michel.asgi:app``.
 
 Connects to Temporal at startup, using the same plugin configuration as the worker.
 """
@@ -9,9 +9,9 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from grokbot.config import Settings
-from grokbot.gateway import create_app
-from grokbot.worker import connect
+from michel.config import Settings
+from michel.gateway import create_app
+from michel.worker import connect
 
 
 @asynccontextmanager

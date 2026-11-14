@@ -77,7 +77,7 @@ Result: 5 agent tests passed on the pinned versions.
 
 1. **Docs parity.** Read the docs overview and sub-pages (subagents, backends, HITL, memory, streaming, going to production) once `docs.langchain.com` is reachable, and compare to the package behavior above.
 2. **Backend semantics.** `StateBackend` versus `FilesystemBackend` with `virtual_mode=True`: confirm path escapes are blocked and that files persist across turns.
-3. **Sub-agent tools.** Confirm the `researcher` sub-agent in `grokbot/agent.py` only receives `fetch_url`, and that it cannot call `deliver_channel_message`.
+3. **Sub-agent tools.** Confirm the `researcher` sub-agent in `michel/agent.py` only receives `fetch_url`, and that it cannot call `deliver_channel_message`.
 4. **Approval for sub-agent tools.** Confirm whether `interrupt_on` on the parent also gates a tool called from inside a sub-agent. Our code assumes it does not; verify.
 5. **Context management.** Drive a long conversation and confirm summarization and eviction trigger, and that approval state survives them.
 6. **Model profiles.** Confirm which harness profile applies to `anthropic:claude-sonnet-5-5`. The package lists Sonnet 4.6 and Opus 4.7 profiles, not 5.5. Check the fallback behavior.

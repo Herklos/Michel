@@ -52,4 +52,4 @@ The `Workspace` trait has a `LocalDisk` adapter and a test `MemoryWorkspace`. Mo
 
 ## 5. Relation to our build
 
-Michel and our `grokbot/` solve the same product shape (persistent Bots, channels, approvals, schedules) with different substrates: Michel uses a local folder plus T3 Code; we use Temporal workflows. Michel's storage table is a useful checklist for what a Bot needs to persist, and its secret-never-syncs rule matches our worker-only secrets.
+Michel (Herklos) and our `michel/` package in this repo solve the same product shape (persistent Bots, channels, approvals, schedules) with different substrates: Michel uses a local folder plus T3 Code; we use Temporal workflows. Michel's storage table is a useful checklist for what a Bot needs to persist, and its secret-never-syncs rule matches our worker-only secrets.

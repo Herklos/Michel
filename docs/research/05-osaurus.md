@@ -77,7 +77,7 @@ CLI: `osaurus ui`, `osaurus serve` (`--expose` for LAN access), `osaurus status`
 
 ## 4. Relevance to this project
 
-Patterns worth comparing with the grokbot backend:
+Patterns worth comparing with the michel backend:
 
 1. **Automations** triggered by schedule, folder change, webhook or feed. Our backend has schedules only, through Temporal Schedules. Webhook and folder triggers are missing.
 2. **Approval card before settings changes.** Similar to our `interrupt_on` gate, applied to configuration.

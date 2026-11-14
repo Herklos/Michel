@@ -15,9 +15,9 @@ from temporalio.client import Client
 from temporalio.deepagents import DeepAgentsPlugin
 from temporalio.worker import Worker
 
-from grokbot.config import Settings
-from grokbot.tools import deliver_channel_message_tool, fetch_url_tool  # noqa: F401  (registers activities)
-from grokbot.workflows import BotWorkflow, ScheduledTurnWorkflow
+from michel.config import Settings
+from michel.tools import deliver_channel_message_tool, fetch_url_tool  # noqa: F401  (registers activities)
+from michel.workflows import BotWorkflow, ScheduledTurnWorkflow
 
 
 def workspace_factory(root: str):
@@ -55,7 +55,7 @@ async def main() -> None:
         task_queue=settings.task_queue,
         workflows=[BotWorkflow, ScheduledTurnWorkflow],
     )
-    print(f"grokbot worker polling {settings.task_queue!r} at {settings.temporal_address}")
+    print(f"michel worker polling {settings.task_queue!r} at {settings.temporal_address}")
     await worker.run()
 
 

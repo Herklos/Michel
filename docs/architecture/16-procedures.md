@@ -188,7 +188,7 @@ An agent step cannot change the graph, add a step, widen its tool grant, or chan
 
 ## Current code **[designed]**
 
-Nothing in `grokbot/` implements procedures. The current `BotWorkflow` and `ScheduledTurnWorkflow` deliver messages to one free-form agent. They are the seed of the agent-step runtime and the trigger code, not of the interpreter.
+Nothing in `michel/` implements procedures. The current `BotWorkflow` and `ScheduledTurnWorkflow` deliver messages to one free-form agent. They are the seed of the agent-step runtime and the trigger code, not of the interpreter.
 
 ## Open questions
 

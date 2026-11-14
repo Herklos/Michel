@@ -3,10 +3,10 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from grokbot.config import Settings
-from grokbot.gateway import create_app
-from grokbot.models import BotState, InboundMessage, ScheduledPrompt
-from grokbot.workflows import BotWorkflow
+from michel.config import Settings
+from michel.gateway import create_app
+from michel.models import BotState, InboundMessage, ScheduledPrompt
+from michel.workflows import BotWorkflow
 
 
 class FakeHandle:

@@ -21,15 +21,15 @@ from temporalio.client import (
 )
 from temporalio.exceptions import WorkflowAlreadyStartedError
 
-from grokbot.config import Settings
-from grokbot.models import (
+from michel.config import Settings
+from michel.models import (
     DEFAULT_SYSTEM_PROMPT,
     BotConfig,
     BotState,
     InboundMessage,
     ScheduledPrompt,
 )
-from grokbot.workflows import BotWorkflow, ScheduledTurnWorkflow
+from michel.workflows import BotWorkflow, ScheduledTurnWorkflow
 
 
 class CreateBot(BaseModel):
@@ -59,7 +59,7 @@ def create_app(
     lifespan: Any = None,
 ) -> FastAPI:
     """Build the gateway. Pass ``client=None`` and a ``lifespan`` that sets ``app.state.client``."""
-    app = FastAPI(title="grokbot gateway", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="michel gateway", version="0.1.0", lifespan=lifespan)
     app.state.client = client
     app.state.settings = settings
 

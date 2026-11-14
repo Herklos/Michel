@@ -1,6 +1,6 @@
 # Research index
 
-Research notes for the grokbot backend. Each file lists findings, sources (with how each was accessed), and the tests still needed. The original combined summary is in `../RESEARCH.md`.
+Research notes for the michel backend. Each file lists findings, sources (with how each was accessed), and the tests still needed. The original combined summary is in `../RESEARCH.md`.
 
 | File | Topic | Confidence | Main source |
 |---|---|---|---|
@@ -17,7 +17,7 @@ These hosts failed DNS resolution, so their pages are unread:
 
 GitHub API calls for several repositories returned 403 without repository access. Raw file URLs on `raw.githubusercontent.com` and PyPI downloads worked.
 
-The Temporal dev server could not be started here, because its binary host is blocked. No workflow has been executed end to end. The grokbot tests run offline.
+The Temporal dev server could not be started here, because its binary host is blocked. No workflow has been executed end to end. The michel tests run offline.
 
 ## Open items
 

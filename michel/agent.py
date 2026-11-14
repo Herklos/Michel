@@ -9,8 +9,8 @@ from typing import Any
 
 from temporalio.deepagents import create_temporal_deep_agent
 
-from grokbot.models import BotConfig
-from grokbot.tools import deliver_channel_message_tool, fetch_url_tool
+from michel.models import BotConfig
+from michel.tools import deliver_channel_message_tool, fetch_url_tool
 
 # Tools whose calls must be approved by a human before they run.
 APPROVAL_REQUIRED = {"deliver_channel_message": True}

@@ -62,4 +62,4 @@ Memory (tenant | user | thread) is scoped; Thread reads tenant and user memory p
 
 ## Current code **[implemented]**
 
-`grokbot/models.py` defines `BotConfig`, `BotState`, `InboundMessage`, `ScheduledPrompt`. The bot is one workflow (one bot = one thread for now). Tenants, versions, sandboxes, memory layers, bindings and budgets are **[designed]**.
+`michel/models.py` defines `BotConfig`, `BotState`, `InboundMessage`, `ScheduledPrompt`. The bot is one workflow (one bot = one thread for now). Tenants, versions, sandboxes, memory layers, bindings and budgets are **[designed]**.

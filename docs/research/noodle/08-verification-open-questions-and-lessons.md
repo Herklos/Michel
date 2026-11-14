@@ -47,4 +47,4 @@ These come from Noodle's documents and code, not its marketing.
 
 1. Build Noodle on a Mac with Xcode 27 and run its tests, to verify the feature claims that depend on runtime behaviour.
 2. Read `Sources/NoodleAgentHost` and `Sources/NoodleAgentBridge` in full, and the sandbox code, to verify the restricted-access claims.
-3. Compare Noodle's restricted sandbox with Temporal activity isolation for our `grokbot/` tools.
+3. Compare Noodle's restricted sandbox with Temporal activity isolation for our `michel/` tools.

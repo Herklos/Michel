@@ -3,8 +3,8 @@ import asyncio
 import httpx
 import pytest
 
-from grokbot.config import Settings
-from grokbot.tools import ToolPolicyError, fetch_page_text, post_to_channel
+from michel.config import Settings
+from michel.tools import ToolPolicyError, fetch_page_text, post_to_channel
 
 SETTINGS = Settings(
     fetch_allowed_hosts=frozenset({"docs.example.com"}),

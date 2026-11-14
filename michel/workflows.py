@@ -6,7 +6,7 @@ and continues-as-new before history grows too large.
 
 The agent loop itself runs inside the workflow and replays deterministically.
 Each model call and each I/O tool call is an activity (see the plugin wiring
-in ``grokbot.worker``).
+in ``michel.worker``).
 """
 
 from __future__ import annotations
@@ -30,8 +30,8 @@ with workflow.unsafe.imports_passed_through():
     from temporalio.deepagents import TemporalBackend
     from temporalio.workflow import ActivityConfig
 
-    from grokbot.agent import build_bot_agent
-    from grokbot.models import BotState, InboundMessage, ScheduledPrompt
+    from michel.agent import build_bot_agent
+    from michel.models import BotState, InboundMessage, ScheduledPrompt
 
 MAX_TRANSCRIPT_ITEMS = 500
 

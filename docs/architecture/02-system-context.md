@@ -49,8 +49,8 @@
 
 ## Process layout
 
-- `grokbot-gateway` (1 or more replicas) — FastAPI. **[implemented]** as `grokbot/gateway.py` and `grokbot/asgi.py`.
-- `grokbot-worker` per task queue (thread, llm, io, sandbox, maintenance). **[implemented]** as one worker on one queue (`grokbot/worker.py`); splitting queues is **[designed]**.
+- `michel-gateway` (1 or more replicas) — FastAPI. **[implemented]** as `michel/gateway.py` and `michel/asgi.py`.
+- `michel-worker` per task queue (thread, llm, io, sandbox, maintenance). **[implemented]** as one worker on one queue (`michel/worker.py`); splitting queues is **[designed]**.
 - `temporal` (dev server locally; production service separately). **[verify]** against a running server.
 - `postgres`, `objectstore` (MinIO for dev), `otel-collector` (optional).
 

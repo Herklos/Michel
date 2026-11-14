@@ -14,7 +14,7 @@ import httpx
 from langchain_core.tools import tool
 from temporalio.deepagents import tool_as_activity
 
-from grokbot.config import Settings, worker_settings
+from michel.config import Settings, worker_settings
 
 MAX_FETCH_BYTES = 200_000
 MAX_RETURN_CHARS = 20_000
