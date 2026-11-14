@@ -2,8 +2,8 @@
 
 ## Tracing
 
-- **OpenTelemetry**: Temporal's OpenTelemetry interceptor (`temporalio.contrib.opentelemetry`) propagates trace context through workflows, activities and child workflows **[verify]** the plugin composition with `DeepAgentsPlugin` (its README says the two compose in either order).
-- **LangSmith**: the standalone `temporalio-langsmith` package (`from temporalio.langsmith import LangSmithPlugin`) links runs to workflow ids. Use it when LangSmith is the trace store. The Deep Agents plugin's README lists it as a composable plugin.
+- **OpenTelemetry**: Temporal's OpenTelemetry interceptor (`temporalio.contrib.opentelemetry`) propagates trace context through workflows, activities and child workflows. Importing it needs the `opentelemetry-sdk` package, which this project does not declare yet (checked 2026-11-14: the import fails without it). **[verify]** the plugin composition with `DeepAgentsPlugin` (its README says the two compose in either order).
+- **LangSmith**: the standalone `temporalio-langsmith` package (`from temporalio.langsmith import LangSmithPlugin`; the package is not installed here, and `temporalio.contrib.langsmith` re-exports from it) links runs to workflow ids. Use it when LangSmith is the trace store. The Deep Agents plugin's README lists it as a composable plugin.
 - Span names carry the thread id (not message content). Message content is recorded only at the level the tenant allows.
 
 ## Metrics

@@ -1,6 +1,6 @@
 # 05. deepagents on Temporal: how each feature maps
 
-Versions: `deepagents==0.7.38`, `temporalio-deepagents==0.0.3` (pre-release), `temporalio==1.36.0`. Sources: the `temporalio-deepagents` README and source, the `deepagents` package source, and `docs/research/temporal-deepagents/`.
+Versions: `deepagents==0.7.38`, `temporalio-deepagents==0.0.3` (pre-release), `temporalio==1.36.0`. Sources: the `temporalio-deepagents` README and source, the `deepagents` package source, and `docs/research/01-temporal-deepagents.md` and `docs/research/02-langchain-deepagents.md`. Checked against the installed packages on 2026-11-14: the plugin's activity names (`deepagents.invoke_model`, `invoke_model_streaming`, `invoke_tool`, `backend_op`), `DeepAgentsPlugin(backends=…, streaming_topic=…, data_converter=…)`, `tool_as_activity` and `activity_as_tool`, `run_deep_agent(state_snapshot=…)`, the testing helpers, and `deepagents.middleware.async_subagents`.
 
 ## The mapping
 
@@ -8,13 +8,13 @@ Versions: `deepagents==0.7.38`, `temporalio-deepagents==0.0.3` (pre-release), `t
 |---|---|---|---|
 | Agent loop (`create_deep_agent`) | `create_temporal_deep_agent(model="provider:name", …)` inside the thread workflow; the loop replays deterministically | workflow | **[implemented]** `michel/agent.py` |
 | Model call | `deepagents.invoke_model` activity (one per model call); the workflow ships only the model name | `llm` queue | **[implemented]** by the plugin |
-| Streaming tokens | `streaming_topic` on the plugin; activity publishes chunk batches to a workflow stream; the final message still returns to the workflow | `llm` queue → clients | **[designed]**, verify streams in 1.36.0 |
+| Streaming tokens | `streaming_topic` on the plugin; activity publishes chunk batches to a workflow stream; the final message still returns to the workflow | `llm` queue → clients | **[designed]**. The plugin accepts `streaming_topic`, and the SDK ships `temporalio.contrib.workflow_streams`. End-to-end behaviour **[verify]** |
 | Planning (`write_todos`) | built-in state middleware | workflow | **[implemented]** (built-in) |
 | Files in state (`StateBackend`, default) | in workflow state; replayed deterministically | workflow | **[implemented]** |
 | Durable workspace files (`TemporalBackend("workspace")`) | `deepagents.backend_op` activities against a worker-side filesystem factory | `io` / `sandbox` queue | **[implemented]** in `michel/workflows.py`; **[verify]** end to end |
 | Sandbox execution (`execute`) | a custom backend whose operations are activities against the sandbox provider | `sandbox` queue | **[designed]** (see `07`) |
 | Custom tools with I/O | `tool_as_activity(fn, start_to_close_timeout=…)` | `io` queue | **[implemented]** `michel/tools.py` |
-| Existing activity as a tool | `activity_as_tool(activity, activity_options=…)` | any | available |
+| Existing activity as a tool | `activity_as_tool(activity, start_to_close_timeout=…, retry_policy=…)` (signature checked in 1.36.0 plugin source) | any | available |
 | Pure tools (no I/O) | plain LangChain tools in the workflow | workflow | the plugin warns about unwrapped I/O tools |
 | Human-in-the-loop | `interrupt_on={tool: True}` with a checkpointer; resume with `Command(resume=…)` after a `decide_approval` update | workflow + Postgres audit | **[implemented]** offline; **[verify]** with the server |
 | Sync subagents (`task`) | deepagents `SubAgent` specs; run inside the parent's loop | workflow | **[implemented]** (`researcher`) |

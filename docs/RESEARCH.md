@@ -1,5 +1,7 @@
 # Research: Temporal Deep Agents, LangChain Deep Agents, and Grok-Bot-style products
 
+> **Status note (2026-11-14).** This is the first combined summary, written during the first research session. It is superseded by the per-topic notes in `docs/research/README.md`. Some sections below say sites were unreachable; a later check showed `docs.temporal.io`, `docs.langchain.com` and `cursor.com` reachable. Section 5 is out of date for those hosts.
+
 Sources were read on 2026-11-14. Each claim names where it came from. Pages that
 could not be reached are listed at the end. Nothing in this file is taken from
 memory without a source.

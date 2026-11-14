@@ -43,7 +43,9 @@ Managed Deep Agents, Hermes and Open SWE all converge on this shape. Rules:
 
 ## Skills
 
-Skills are files in `/skills/` with a `SKILL.md`. Agent-created skills are stored with a usage counter. A curator (`MaintenanceWorkflow`) marks unused skills stale and archives them after a period; skills referenced by any schedule are never archived (Hermes' rule). **[designed]**
+Skills are files in `/skills/` with a `SKILL.md`. Agent-created skills are stored with a usage counter. A curator (`MaintenanceWorkflow`) marks unused skills stale and archives them after a period. **[designed]**. Two rules:
+- Skills referenced by any schedule or procedure version are never archived. This is **our** rule; the Hermes research does not describe a schedule exception.
+- A run lists skills again each time, and a thread does not keep a skill list from an earlier run. This follows Robin (Open SWE's successor, `mda/rt/skills.py`): a thread must not keep the skills of a person a previous run acted for.
 
 ## Retention
 

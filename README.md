@@ -8,7 +8,9 @@ long-lived Temporal workflow that runs a LangChain Deep Agent. The agent plans, 
 and writes a per-bot workspace, pauses for human approval before side effects, and
 survives crashes, restarts and long histories.
 
-Research behind the design, with sources and the gaps: [docs/RESEARCH.md](docs/RESEARCH.md).
+Target architecture (17 pages, with labels for what is built and what is designed): [docs/architecture/README.md](docs/architecture/README.md).
+Research with sources and gaps, by topic: [docs/research/README.md](docs/research/README.md). The first combined summary is [docs/RESEARCH.md](docs/RESEARCH.md) and is superseded.
+Audit of these docs and the list of spikes: [docs/audit/2026-11-14-doc-audit.md](docs/audit/2026-11-14-doc-audit.md) and [docs/spikes.md](docs/spikes.md).
 
 ## Architecture
 
@@ -54,7 +56,12 @@ Key decisions:
 | `michel/tools.py` | `fetch_url` and `deliver_channel_message` as activity-backed tools, plus policy checks |
 | `michel/worker.py` | Worker process and `DeepAgentsPlugin` wiring, including the per-bot workspace factory |
 | `michel/gateway.py` | HTTP API that maps requests to Temporal operations |
+| `michel/asgi.py` | ASGI entry point for the gateway (`uvicorn michel.asgi:app`) |
+| `michel/models.py` | Serializable data types: bot config, state, inbound messages, scheduled prompts |
 | `michel/config.py` | Environment settings |
+| `docs/architecture/` | Target architecture and decisions (ADRs) |
+| `docs/research/` | Research notes with sources |
+| `CLAUDE.md` | Preparation rules for working in this repo |
 | `tests/` | Offline tests (no Temporal server or LLM needed) |
 
 ## Run it

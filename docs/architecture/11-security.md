@@ -33,10 +33,12 @@
 |---|---|
 | Any message to a channel other than the one that started the turn | required |
 | `http_request` with a write method (POST, PUT, PATCH, DELETE) to a host outside the allowlist | required |
-| Shell command that leaves the workspace or touches credentials | required (the Auto-review classifier, Noodle's and Managed Deep Agents' pattern, can pre-screen it) |
+| Shell command that leaves the workspace or touches credentials | required (Open SWE's auto-review pattern, `mda/rt/auto_review.py` in its repo, can pre-screen it) |
 | Creating a schedule | required unless the bot version allows it |
 | Writing bot-scope memory | optional, per bot |
 | Reading the outside web, reading files in the workspace | not required |
+
+Policy comes from a pinned or default source, never from the content it judges. Robin (Open SWE's successor) reads its auto-approve rules from the repository's default branch, so a pull request cannot rewrite the rules that judge it (`docs/research/peers/01-open-swe-and-t3code-structure.md`, section 2.7). The same rule applies here: a procedure version or a bot version is the source of its own policy.
 
 An approval shows the exact action, its arguments (bounded), the thread, and the reason the agent gave. The decision is recorded with the decider's identity. Expiry rejects the action.
 
@@ -48,7 +50,7 @@ An approval shows the exact action, its arguments (bounded), the thread, and the
 
 ## Payload encryption
 
-Temporal stores workflow inputs and activity results. Anything that could contain personal data or secrets is encrypted by a payload codec on the client and worker side (a custom data converter, which the `temporalio-deepagents` plugin accepts) **[verify]** the codec wiring for `DeepAgentsPlugin(data_converter=...)` in 1.36.0. Keys come from the secret store, rotated on a schedule.
+Temporal stores workflow inputs and activity results. Anything that could contain personal data or secrets is encrypted by a payload codec on the client and worker side. `DeepAgentsPlugin` accepts a `data_converter` argument (checked in the installed plugin, 1.36.0 / 0.0.3). The codec itself is **[designed]** and its wiring **[verify]** on a server. Keys come from the secret store, rotated on a schedule.
 
 ## Identity and access to the platform
 

@@ -33,7 +33,8 @@ triggers:
   - type: webhook                       # external event, signed (see 09)
     source: email-parser
   - type: schedule
-    cron: "CRON_TZ=Europe/Paris 0 9 * * 1-5"
+    cron: "0 9 * * 1-5"
+    timezone: Europe/Paris                # maps to Temporal ScheduleSpec.time_zone_name
     purpose: sweep unprocessed invoices
 steps:
   - id: extract
@@ -150,13 +151,13 @@ An agent step cannot change the graph, add a step, widen its tool grant, or chan
 |---|---|---|
 | Run | workflow `ProcedureWorkflow` | id from the business key for correlated triggers, so signal-with-start reaches the open run; from `run_id` otherwise; reuse policy allows a new run after the old one closes |
 | Agent step | child workflow `AgentStepWorkflow` (deepagents) | parent close policy `REQUEST_CANCEL`; its history stays separate |
-| Tool step | activity on the `tools` queue | retries per step; non-idempotent tools need an idempotency key |
+| Tool step | activity on the `io` queue (`04`) | retries per step; non-idempotent tools need an idempotency key |
 | Approval | `wait_condition` + signal / update `decide_approval` | update validator checks the approver and the expiry |
 | Timeout | `wait_condition(timeout=...)` | no external timer needed |
 | Condition | interpreter code, CEL evaluation | no activity |
 | Loop | interpreter loop with a counter | continue-as-new past the history threshold |
 | Time trigger | Temporal Schedule | `10` |
-| Event trigger | signal-with-start | `[verify]` against the Temporal server |
+| Event trigger | signal-with-start (the `start_signal` argument exists in 1.36.0) | behaviour against a server **[verify]** |
 | Sub-procedure | child workflow `ProcedureWorkflow` | depth capped |
 
 ## Guards

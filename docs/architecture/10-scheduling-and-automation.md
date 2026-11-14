@@ -18,7 +18,7 @@ Scheduled procedures are the main form of unattended work. Their steps, approval
 - Spec: cron (UTC, or a time zone), intervals, or one-shot times. Pause and resume are supported.
 - Overlap policy **SKIP** by default: a firing that finds the previous run still going is dropped and recorded.
 - Catch-up (misfire) policy: skip missed fires by default; a bot may opt into "run once for the missed window".
-- Each firing starts `ScheduleTurnWorkflow`, which delivers the prompt to the thread as a `schedule` sender. The thread is created if it does not exist. A schedule that targets a thread uses the thread's bot version at the time of the firing.
+- Each firing starts `ScheduleTurnWorkflow`, which delivers the prompt to the thread as a `schedule` sender. **Current code** signals an existing bot and fails if the bot is missing. Creating the thread on fire is **[designed]**. A schedule that targets a thread uses the thread's bot version at the time of the firing.
 - Schedule metadata in Postgres: owner, bot, thread policy (new thread or the same thread), channel target for results, budget class.
 
 ## Limits

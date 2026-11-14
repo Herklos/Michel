@@ -62,4 +62,6 @@ Memory (tenant | user | thread) is scoped; Thread reads tenant and user memory p
 
 ## Current code **[implemented]**
 
-`michel/models.py` defines `BotConfig`, `BotState`, `InboundMessage`, `ScheduledPrompt`. The bot is one workflow (one bot = one thread for now). Tenants, versions, sandboxes, memory layers, bindings and budgets are **[designed]**.
+`michel/models.py` defines `BotConfig`, `BotState`, `InboundMessage`, `ScheduledPrompt`. The bot is one workflow (one bot = one thread for now). In code, the workflow id is the bot id, `bot-{name}-{hex}`, set by the gateway. Tenants, versions, sandboxes, memory layers, bindings and budgets are **[designed]**.
+
+Open SWE / Robin keeps a typed run catalog and a per-workspace settings tier (instance, workspace, user, with `null` meaning "inherit"). Both are candidates for this model. See `docs/research/peers/01-open-swe-and-t3code-structure.md`, section 4.

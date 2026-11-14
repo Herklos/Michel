@@ -14,7 +14,9 @@
 | Double-texting policies | yes | enqueue only |
 | Stop, suspend, budgets | yes | not implemented |
 | Sandboxes | yes | not implemented |
-| Channels other than HTTP | yes | not implemented |
+| Channels other than HTTP | yes | partial: outbound webhook delivery (`deliver_channel_message`); no inbound adapters |
+| Approval decision update and close signal | yes | implemented (`decide_approval`, `close`), without approval ids |
+| Completion notice for every run (F10) | yes | not implemented (`06`, "Completion notice") |
 | Approval timeout and expiry | yes | not implemented |
 | Child workflows for subagents | yes | not implemented |
 | Audit log | yes | not implemented |
@@ -26,17 +28,17 @@
 
 ## Phases
 
-**Phase 1: run end to end on Temporal.** Start a Temporal dev server; run the worker and gateway; send a message; approve a delivery; check the webhook; add replay and time-skipping tests. Exit: the offline tests and the server tests pass on the same workflow code.
+**Phase 1: run end to end on Temporal.** Start a Temporal dev server; run the worker and gateway; send a message; approve a delivery; check the webhook; add replay and time-skipping tests; post a completion notice when a run ends, including on failure (F10). Exit: the offline tests and the server tests pass on the same workflow code. Spikes that gate this phase are in `docs/spikes.md`.
 
 **Phase 2: persistence and a real sandbox.** Postgres for transcript, approvals and audit; continue-as-new with the message snapshot in Postgres; Docker sandbox provider with egress proxy and credential injection; the `sandbox` queue; double-texting `interrupt` and `rollback`; stop; approval timeout.
 
-**Phase 2b: procedures (core product).** Procedure definition schema and validator (bounded loops, acyclic sub-procedures, approval on every write tool, tool grants a subset of the agent's); `ProcedureWorkflow` interpreter for `agent`, `tool`, `approval`, `condition`, `loop`, `wait` and `end` steps; `AgentStepWorkflow`; CEL for conditions; the approval timeout routes. Exit: the invoice example in `16` runs end to end on the dev server with replay tests. Start after Phase 1, alongside Phase 2 persistence, since run state and audit need Postgres.
+**Phase 2b: procedures (core product).** Procedure definition schema and validator (bounded loops, acyclic sub-procedures, approval on every write tool, tool grants a subset of the agent's); `ProcedureWorkflow` interpreter for `agent`, `tool`, `approval`, `condition`, `loop`, `wait` and `end` steps; `AgentStepWorkflow`; CEL for conditions; the approval timeout routes; tenant roles (F18: operator, admin, approver, user, auditor), because a step's approvers are roles. Exit: the invoice example in `16` runs end to end on the dev server with replay tests. Start after Phase 1, alongside Phase 2 persistence, since run state and audit need Postgres.
 
-**Phase 3: channels, triggers and memory.** Triggers for webhooks (signal-with-start with business-key correlation) and agent events; Slack and GitHub channels with signed webhooks, identity linking, bindings and channel posts; bot and user memory layers with limits; skills directory and curator. Slack and GitHub channels with signed webhooks, identity linking, bindings and channel posts; bot and user memory layers with limits; skills directory and curator.
+**Phase 3: channels, triggers and memory.** Triggers for webhooks (signal-with-start with business-key correlation) and agent events; generic signed webhook intake; Slack and GitHub channels with signed webhooks, identity linking (F8), bindings and channel posts (the first one is open, question 3); bot and user memory layers with limits (F5, F9); skills directory and curator.
 
-**Phase 4: operations.** Budgets and suspend; schedules API with runtime creation and loop guards; child-workflow subagents; observability (OpenTelemetry, search attributes, dashboards); runbooks; multi-queue deployment; worker versioning.
+**Phase 4: operations.** Budgets and suspend (N6); schedules API with runtime creation and loop guards (F6); child-workflow subagents; observability (OpenTelemetry, search attributes, dashboards); payload encryption codec (N5, ADR-008); runbooks; multi-queue deployment; worker versioning (N8).
 
-**Phase 5: scale and product.** Tenants and namespaces; evaluations; MCP tool grants with OAuth; admin side and user side web clients (F15, F16); audit query and export (F17); load tests; backup drills.
+**Phase 5: scale and product.** Tenants and namespaces; Linear channel (F7); evaluations; MCP tool grants with OAuth; admin side and user side web clients (F15, F16); audit query and export (F17); load tests; backup drills.
 
 ## Risks
 

@@ -7,10 +7,10 @@ A **channel** is an external messaging surface that starts turns and receives re
 | Channel | Inbound | Outbound | Phase |
 |---|---|---|---|
 | HTTP API | `POST /v1/bots/{id}/messages` with an API key | response body or a callback URL | **[implemented]** (current gateway) |
-| Generic webhook | `POST /webhooks/{provider}` with a signature | provider's API via an activity | Phase 2 |
-| Slack | Events API and interactivity, signed with the Slack signing secret | Web API (`chat.postMessage`), Block Kit | Phase 2 |
-| GitHub | App webhooks, signed with the webhook secret | comments, reviews, labels | Phase 3 |
-| Linear | app webhooks, signed | comments, agent sessions | Phase 3 |
+| Generic webhook | `POST /webhooks/{provider}` with a signature | provider's API via an activity | Phase 3 (with procedure triggers, `16`) |
+| Slack | Events API and interactivity, signed with the Slack signing secret | Web API (`chat.postMessage`), Block Kit | Phase 3; first channel is open (`15`, question 3) |
+| GitHub | App webhooks, signed with the webhook secret | comments, reviews, labels | Phase 3; first channel is open (`15`, question 3) |
+| Linear | app webhooks, signed | comments, agent sessions | Phase 5 |
 
 ## Intake pipeline (gateway)
 
@@ -31,7 +31,7 @@ Steps 1 to 6 are stateless. Step 7 writes a binding row. Step 8 is the only call
 
 ## Signatures and replay protection
 
-- **Standard Webhooks** scheme (used by Managed Deep Agents and Open SWE): HMAC-SHA256 over `webhook-id.webhook-timestamp.body`, headers `webhook-id`, `webhook-timestamp`, `webhook-signature`; reject timestamps older than five minutes; the `webhook-id` is the idempotency key.
+- **Standard Webhooks** scheme (used by Managed Deep Agents, `docs/research/managed-deep-agents/03`; Open SWE does not use it, per the research): HMAC-SHA256 over `webhook-id.webhook-timestamp.body`, headers `webhook-id`, `webhook-timestamp`, `webhook-signature`; reject timestamps older than five minutes; the `webhook-id` is the idempotency key.
 - **Slack**: signing secret; reject requests older than five minutes.
 - **GitHub**: `X-Hub-Signature-256` HMAC over the raw body; the delivery id is the idempotency key.
 - Secrets live in the gateway's secret store, never in Postgres in plain text.
