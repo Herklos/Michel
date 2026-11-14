@@ -35,8 +35,9 @@ Status: **design**, written 2026-11-14. The code in `grokbot/` implements a subs
 | [11-security.md](11-security.md) | Trust boundaries, secrets, approvals, sandboxes, prompt injection, audit, budgets |
 | [12-observability-and-operations.md](12-observability-and-operations.md) | Tracing, metrics, search attributes, dashboards, deployment, rollout and versioning |
 | [13-testing-and-quality.md](13-testing-and-quality.md) | Test levels, determinism checks, replay tests, evaluation |
-| [14-decisions.md](14-decisions.md) | Architecture decision records (ADR-001 to ADR-012) |
+| [14-decisions.md](14-decisions.md) | Architecture decision records (ADR-001 to ADR-013) |
 | [15-roadmap-and-gaps.md](15-roadmap-and-gaps.md) | Phases, what the current code has, what is missing, risks, open questions |
+| [16-procedures.md](16-procedures.md) | Procedures as the core unit: versioned step graphs, triggers, per-step approval policy, conditions, bounded loops, MCP-bound tools, enforcement in the workflow |
 
 ## Labels used in the pages
 

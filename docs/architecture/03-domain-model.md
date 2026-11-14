@@ -19,7 +19,13 @@ Each entity lists its identity, its owner, where it lives, and its lifecycle. "L
 | **Skill** | name + version | bot | object store + Postgres row | created by agent, curated, archived |
 | **Schedule** | Temporal schedule id | bot, owner | Temporal schedule + Postgres row | active, paused, deleted |
 | **Channel binding** | `(provider, external_conversation_id)` | tenant | Postgres | created on first message, unbound on request |
-| **Approval** | `approval_id` | turn | Postgres row + workflow state | pending, approved, rejected, expired |
+| **Procedure** | `procedure_id` | tenant | Postgres | drafted, published, archived |
+| **Procedure version** | `procedure_id` + `version` | procedure | Postgres (validated JSON) | immutable once published; pinned by runs |
+| **Procedure trigger** | `trigger_id` | procedure | Postgres row; Temporal Schedule for time triggers | enabled, paused, deleted |
+| **Procedure run** | `run_id`; workflow id from the business key when correlated | procedure version | `ProcedureWorkflow` history + Postgres index | running, waiting_approval, completed, rejected, failed, budget_exceeded |
+| **Step run** | `(run_id, step_id, attempt)` | procedure run | run history + Postgres row | pending, running, waiting_approval, succeeded, failed, skipped, timed_out |
+| **Connection** | `connection_id` | tenant | Postgres (secret reference) | configured, tools pinned per version, revoked |
+| **Approval** | `approval_id` | turn or step run | Postgres row + workflow state | pending, approved, rejected, expired |
 | **Tool grant** | `(user_id, connection)` | user | Postgres (secret reference) | granted, revoked |
 | **Budget** | `(scope, window)` | tenant, bot, thread | Postgres (ledger) + workflow counters | per window |
 | **Audit record** | `event_id` | any | Postgres, append-only | never updated |
@@ -36,6 +42,11 @@ Thread 1──* SubagentTask
 Thread 1──0..1 Sandbox
 Thread *──* ChannelBinding               (a conversation may map to one thread at a time)
 Bot 1──* Schedule  ──starts──▶ Thread
+Procedure 1──* ProcedureVersion 1──* ProcedureRun ──pins──▶ ProcedureVersion
+ProcedureRun 1──* StepRun 1──0..1 Approval
+ProcedureVersion 1──* ProcedureTrigger ──starts──▶ ProcedureRun
+ProcedureVersion *──* Connection         (each step's tools are granted from these)
+ProcedureRun 0..1──* Thread              (a person may talk to the agent of the running step)
 User 1──* ToolGrant
 Memory (tenant | user | thread) is scoped; Thread reads tenant and user memory per turn
 ```

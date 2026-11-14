@@ -73,3 +73,9 @@ Each record: context, decision, consequences. Status is **accepted** unless mark
 **Context.** LangSmith gives tracing, evaluation and a gateway. It is a SaaS dependency, and its gateway is beta.
 **Decision.** Tracing through OpenTelemetry by default; the LangSmith plugin and gateway are switches.
 **Consequences.** The system runs without a LangSmith account; some features (online evaluators) are unavailable without it.
+
+## ADR-013: procedures are the core unit, enforced by a workflow interpreter
+
+**Context.** The product is for businesses that describe their processes and want agents to carry them out. A prompt cannot guarantee that an approval happens, that a loop stops, or that a step uses only its granted tools. Bots alone (free-form agents with schedules) do not express a process.
+**Decision.** A procedure is a versioned, validated graph of steps (agent, tool, approval, condition, loop, wait, sub-procedure, end). `ProcedureWorkflow` interprets one pinned version deterministically; agents run only inside agent steps, with a tool grant and an output schema. Approval policy, loop bounds and tool effects are part of the version, set by the operator, not by an agent. Triggers are schedules, signed webhooks, agent events, procedure events, manual calls and channel messages, correlated by a business key.
+**Consequences.** The process is enforced by code and is auditable. Authoring is a data problem (schema, validator, editor). The interpreter is a new component to build and test with replay tests. Agents become replaceable inside steps. See `16-procedures.md`.

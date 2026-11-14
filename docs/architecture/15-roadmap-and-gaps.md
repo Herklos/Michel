@@ -28,7 +28,9 @@
 
 **Phase 2: persistence and a real sandbox.** Postgres for transcript, approvals and audit; continue-as-new with the message snapshot in Postgres; Docker sandbox provider with egress proxy and credential injection; the `sandbox` queue; double-texting `interrupt` and `rollback`; stop; approval timeout.
 
-**Phase 3: channels and memory.** Slack and GitHub channels with signed webhooks, identity linking, bindings and channel posts; bot and user memory layers with limits; skills directory and curator.
+**Phase 2b: procedures (core product).** Procedure definition schema and validator (bounded loops, acyclic sub-procedures, approval on every write tool, tool grants a subset of the agent's); `ProcedureWorkflow` interpreter for `agent`, `tool`, `approval`, `condition`, `loop`, `wait` and `end` steps; `AgentStepWorkflow`; CEL for conditions; the approval timeout routes. Exit: the invoice example in `16` runs end to end on the dev server with replay tests. Start after Phase 1, alongside Phase 2 persistence, since run state and audit need Postgres.
+
+**Phase 3: channels, triggers and memory.** Triggers for webhooks (signal-with-start with business-key correlation) and agent events; Slack and GitHub channels with signed webhooks, identity linking, bindings and channel posts; bot and user memory layers with limits; skills directory and curator. Slack and GitHub channels with signed webhooks, identity linking, bindings and channel posts; bot and user memory layers with limits; skills directory and curator.
 
 **Phase 4: operations.** Budgets and suspend; schedules API with runtime creation and loop guards; child-workflow subagents; observability (OpenTelemetry, search attributes, dashboards); runbooks; multi-queue deployment; worker versioning.
 
@@ -55,6 +57,8 @@
 5. Does the deepagents async-subagent middleware route cleanly to child workflows (ADR-005)? Needs a prototype.
 6. Payload codec: is encryption of history required by the data policy? (ADR-008, `11`)
 7. Which Temporal version and deployment target (Cloud or self-hosted) are approved?
+8. Procedure authoring: schema-first (YAML/JSON) or visual editor first? The business user is the author (`16`, open question 1).
+9. Is a free-form chat bot still a product in its own right, or only an agent inside a procedure step? This changes whether the thread workflow is the first thing to build or the interpreter is (`16`).
 
 ## What this design does not decide
 

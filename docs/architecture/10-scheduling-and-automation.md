@@ -9,6 +9,9 @@
 | Runtime schedule | the agent, through a tool | Temporal Schedule created by an activity, under limits | "check the deploy again in 2 hours" |
 | Event trigger | a channel or webhook | signal-with-start | "a PR gets a review comment" |
 | Self wake-up | the agent, for work it is waiting on | timer in the thread workflow, with a note | "come back to this at 16:00" |
+| Procedure trigger | a procedure version's trigger list | Temporal Schedule starts `ProcedureWorkflow` | "sweep unprocessed invoices every weekday at 9" (see `16`) |
+
+Scheduled procedures are the main form of unattended work. Their steps, approval policies and loop bounds come from the procedure version, not from the schedule, so a schedule cannot widen what a procedure may do.
 
 ## Temporal Schedules
 

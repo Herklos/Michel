@@ -8,6 +8,8 @@
 | `SubagentWorkflow` | `{thread}:task:{n}` | delegated background task | minutes to hours | runs one async subagent with its own history | **[designed]** |
 | `ScheduleTurnWorkflow` | Temporal Schedule action id | schedule firing | seconds | delivers a scheduled prompt to a thread | **[implemented]** |
 | `MaintenanceWorkflow` | per tenant | periodic | forever | sandbox reaper, memory curation, budget resets, audit export | **[designed]** |
+| `ProcedureWorkflow` | `run:{tenant}:{procedure}:{run_id}` | procedure run | minutes to weeks; continues-as-new | interprets one pinned procedure version: walks steps, waits on approvals and events, enforces loop bounds and output schemas (see `16`) | **[designed]** |
+| `AgentStepWorkflow` | `{run}:step:{step_id}:{attempt}` | agent step attempt | minutes | runs one deepagents agent with a step's tool grant and output schema, returns validated output | **[designed]** |
 
 Deterministic code only in workflows: no clock reads (use `workflow.now()`), no network, no randomness outside `workflow.uuid4()`-style helpers, no reads of environment or files. Model and tool calls are activities.
 
