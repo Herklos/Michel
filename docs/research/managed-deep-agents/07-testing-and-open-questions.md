@@ -10,7 +10,7 @@ Companion to files 01–06. Lists what was not verified in this session, why, an
 | The bundled `mda` binary was **not run** (sandbox policy denied the execution; not worked around) | `mda build`, `mda init` and CLI behavior are documented from the README only. |
 | Temporal dev server cannot be downloaded | No real workflow execution. |
 | `api.github.com` returns 403 for unlisted repositories | Could not browse the managed-deepagents repo's source or issues. |
-| Managed platform is private or public beta (sources conflict) | Control-plane endpoints unverifiable without access. |
+| Managed platform is public beta (resolved by the docs, file 08) | Control-plane endpoints still need a workspace to test. |
 
 ## 2. Test plan by area
 
@@ -54,7 +54,7 @@ Companion to files 01–06. Lists what was not verified in this session, why, an
 
 ## 3. Open questions
 
-1. **Managed product status.** Public beta (managed-deepagents README) or private preview with waitlist (deepagents-cli README)? Confirm with the vendor or the user's account.
+1. **Managed product status. Resolved (file 08):** public beta on LangSmith Cloud and BYOC, per the official docs. The waitlist text was in the deprecated `deepagents-cli` README.
 2. **GitHub channel replies.** The README is inconsistent (see file 03 §1).
 3. **Which Noodle/Osaurus/Grok comparisons matter now?** Out of scope for this file; see `docs/research/`.
 4. **Hosted or self-hosted target?** Changes sandbox and tenancy choices (file 06 §6).
