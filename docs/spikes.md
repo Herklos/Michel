@@ -77,6 +77,23 @@ These were found by reading the code on 2026-11-14. They are not yet tested.
 | S-33 | Is a free-form chat bot a product on its own (open question 9 in `15`) | User | open |
 | S-34 | Set `main` as the GitHub default branch (Settings, Branches). No tool in this session can change repository settings | User | open |
 
+## G2. Spikes from the architecture audit
+
+Source: `docs/audit/2026-11-14-architecture-and-plan-audit.md`.
+
+| ID | Question | How to run | Answer looks like | Blocks | Status |
+|---|---|---|---|---|---|
+| S-39 | Build, adopt or borrow for the procedure definition: Temporal's DSL interpreter sample, BPMN, or the CNCF Serverless Workflow spec? | Read each for step types, loops, human tasks, expressions; map the invoice example onto each | A one-page comparison and a recommendation recorded in `16` | Authoring format (`16`, question 1) | open |
+| S-40 | Does `fetch_url` allow DNS rebinding or private addresses? | Test with a hostname that resolves to a private address | Test result; an IP check added if it passes | Tool safety (`README.md`) | open |
+| S-41 | Where is approver authorization enforced, given that update validators cannot do I/O? | Prototype: gateway verifies role and passes a signed identity; workflow checks it against the version's approver list | Unauthorised decision rejected; role change between request and decision handled as documented | Approval design (`16`, ADR-014) | open |
+| S-42 | Can agent steps hold write tools without a second approval mechanism? | Map `interrupt_on` to a step's approval policy; compare with read-only grants plus a tool step | One rule written in `16`; validator rule added | Enforcement (F13, F14) | open |
+| S-43 | What is the maximum inline step output, and what happens above it? | Run a step that returns 1 MB; observe warnings and limits on a server | Cap chosen; claim-check rule in the schema | Procedure schema (`16`) | blocked on S-02 |
+| S-44 | How does the Postgres read model stay in step with workflow state, and how are gaps found? | Prototype a `record_event` activity per transition plus a reconciliation job against visibility | Kill-a-worker test shows no missing audit row, or a repair job fills it | Admin and user sides, audit (`03`, `11`) | open |
+| S-45 | How do browsers receive progress, approvals and tokens? | Prototype snapshot-plus-cursor over SSE from the projection; test `workflow_streams` for tokens | Protocol page written; latency measured | Chat UX (`05`) | open |
+| S-46 | Can the tenant factory return a per-tenant namespace client without changing callers? | Wrap client creation in one factory; test two namespaces on a dev server | Both namespaces work; id scheme documented | Isolation (`04`) | blocked on S-02 |
+| S-47 | Does the `AgentStep` interface hold for both a simple loop and deepagents? | Implement both behind one interface; run the same scripted model | Identical results on a fixture | Agent step (`05`, `16`) | open |
+| S-48 | Does the repo have CI that runs the tests on a Temporal test server? | Add a workflow; run on a runner that can download the server | Green run on `main` | Everything labelled `[verify]` | open |
+
 ## H. Research notes to write
 
 | ID | Topic | Source | Status |
